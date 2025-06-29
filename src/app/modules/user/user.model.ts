@@ -41,6 +41,13 @@ userSchema.statics.isUserExist = async function (email: string) {
   return await User.findOne({ email: email }).select('+password');
 };
 
+userSchema.statics.isPasswordMatched = async function (
+  plainTextPassword: string,
+  hashedPassword: string,
+) {
+  return await bcrypt.compare(plainTextPassword, hashedPassword);
+};
+
 userSchema.pre('save', async function (next) {
   const user = this as TUser;
   user.password = await bcrypt.hash(user.password, Number(config.salt_round));

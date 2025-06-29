@@ -1,6 +1,7 @@
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 export type TUser = {
+  _id?: Types.ObjectId;
   firstName: string;
   lastName: string;
   email: string;
@@ -10,4 +11,8 @@ export type TUser = {
 
 export interface UserModel extends Model<TUser> {
   isUserExist(email: string): Promise<TUser | null>;
+  isPasswordMatched(
+    plainTextPassword: string,
+    hashedPassword: string,
+  ): Promise<boolean>;
 }

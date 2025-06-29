@@ -17,7 +17,7 @@ const getAllUserFromDB = async () => {
   return users;
 };
 
-export const UserService = {
+export const UserServices = {
   createUserIntoDB,
   getAllUserFromDB,
 };
