@@ -20,7 +20,16 @@ const addReviewInDB = async (slug: string, payload: TReview) => {
 };
 
 const getAllReviewFromDB = async () => {
-  const reviews = await Review.find();
+  const reviews = await Review.find().populate([
+    {
+      path: 'productId',
+      select: 'title',
+    },
+    {
+      path: 'userId',
+      select: 'firstName lastName',
+    },
+  ]);
   return reviews;
 };
 

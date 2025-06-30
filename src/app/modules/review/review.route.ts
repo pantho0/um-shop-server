@@ -3,8 +3,8 @@ import { ReviewControllers } from './review.controller';
 
 const router = Router();
 
+router.get('/', ReviewControllers.getAllReview);
 router.post('/add-review/:slug', ReviewControllers.addReview);
-router.get('/get-all-review', ReviewControllers.getAllReview);
 router.get('/get-review-by-id/:productId', ReviewControllers.getReviewById);
 router.put(
   '/update-review-by-id/:productId',
