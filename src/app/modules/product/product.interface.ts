@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export interface IProduct extends Document {
   title: string;
@@ -10,4 +10,5 @@ export interface IProduct extends Document {
   details: string;
   price: number;
   images: string[];
+  reviews?: Types.ObjectId[];
 }
