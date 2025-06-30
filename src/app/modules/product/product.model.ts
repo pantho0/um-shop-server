@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { IProduct } from './product.interface';
 import slugify from 'slugify';
 
@@ -42,11 +42,6 @@ const ProductSchema = new Schema<IProduct>(
     images: {
       type: [String],
       required: true,
-    },
-    reviews: {
-      type: [Schema.Types.ObjectId],
-      ref: 'Review',
-      default: [],
     },
   },
   {
