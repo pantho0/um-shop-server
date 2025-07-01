@@ -24,7 +24,7 @@ const getAllReview = catchAsync(async (req, res) => {
 });
 
 const getReviewById = catchAsync(async (req, res) => {
-  const result = await ReviewServices.getReviewByIdFromDB(req.params.id);
+  const result = await ReviewServices.getReviewByIdFromDB(req.params.productId);
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
