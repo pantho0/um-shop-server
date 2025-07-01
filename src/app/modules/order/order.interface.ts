@@ -14,5 +14,10 @@ export type TOrder = {
   dist: string;
   address: string;
   grand_total: number;
+  isConfirmed: boolean;
+  isDelivered: boolean;
+  isPaid: boolean;
+  paymentType: string;
+  status: 'pending' | 'delivered';
   orderedProducts: TOrderedProduct[];
 };

@@ -59,6 +59,27 @@ const orderSchema = new Schema<TOrder>(
       required: [true, 'Grand total is required for the order'],
       min: [0, 'Grand total cannot be negative'],
     },
+    isConfirmed: {
+      type: Boolean,
+      default: false,
+    },
+    isDelivered: {
+      type: Boolean,
+      default: false,
+    },
+    isPaid: {
+      type: Boolean,
+      default: false,
+    },
+    paymentType: {
+      type: String,
+      required: [true, 'Payment type is required for the order'],
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'delivered'],
+      default: 'pending',
+    },
     orderedProducts: {
       type: [orderedProductSchema],
       required: [true, 'Ordered products list cannot be empty'],

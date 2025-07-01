@@ -62,6 +62,19 @@ export const createOrderValidationSchema = z.object({
     .refine(val => typeof val === 'number' && !isNaN(val), {
       message: 'Grand total must be a valid number.',
     }),
+  isConfirmed: z.boolean().default(false),
+  isDelivered: z.boolean().default(false),
+  isPaid: z.boolean().default(false),
+  paymentType: z
+    .string()
+    .trim()
+    .min(1, { message: 'Payment type cannot be empty.' })
+    .nonempty({ message: 'Payment type is required.' }),
+  status: z
+    .string()
+    .trim()
+    .min(1, { message: 'Status cannot be empty.' })
+    .nonempty({ message: 'Status is required.' }),
   orderedProducts: z
     .array(orderedProductValidationSchema)
     .min(1, { message: 'An order must contain at least one product.' }),
@@ -92,6 +105,19 @@ export const updateOrderValidationSchema = z.object({
     .refine(val => typeof val === 'number' && !isNaN(val), {
       message: 'Grand total must be a valid number.',
     })
+    .optional(),
+  isConfirmed: z.boolean().optional(),
+  isDelivered: z.boolean().optional(),
+  isPaid: z.boolean().optional(),
+  paymentType: z
+    .string()
+    .trim()
+    .min(1, { message: 'Payment type cannot be empty.' })
+    .optional(),
+  status: z
+    .string()
+    .trim()
+    .min(1, { message: 'Status cannot be empty.' })
     .optional(),
   orderedProducts: z
     .array(orderedProductValidationSchema)
