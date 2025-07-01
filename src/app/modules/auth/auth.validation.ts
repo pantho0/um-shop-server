@@ -16,3 +16,10 @@ export const changePasswordValidationSchema = z.object({
     newPassword: passwordValidation,
   }),
 });
+
+export const resetPasswordValidationSchema = z.object({
+  body: z.object({
+    email: z.string().min(1, { message: 'Email is required.' }),
+    newPassword: passwordValidation,
+  }),
+});
