@@ -12,41 +12,45 @@ const passwordValidation = z
   );
 
 export const createUserValidationSchema = z.object({
-  firstName: z
-    .string()
-    .trim()
-    .min(1, { message: 'First name cannot be empty.' })
-    .nonempty({ message: 'First name is required.' }),
-  lastName: z
-    .string()
-    .trim()
-    .min(1, { message: 'Last name cannot be empty.' })
-    .nonempty({ message: 'Last name is required.' }),
-  email: z
-    .string()
-    .trim()
-    .email({ message: 'Please enter a valid email address.' })
-    .nonempty({ message: 'Email is required.' }),
-  password: passwordValidation,
-  role: z.enum(['admin', 'user']).default('user'),
+  body: z.object({
+    firstName: z
+      .string()
+      .trim()
+      .min(1, { message: 'First name cannot be empty.' })
+      .nonempty({ message: 'First name is required.' }),
+    lastName: z
+      .string()
+      .trim()
+      .min(1, { message: 'Last name cannot be empty.' })
+      .nonempty({ message: 'Last name is required.' }),
+    email: z
+      .string()
+      .trim()
+      .email({ message: 'Please enter a valid email address.' })
+      .nonempty({ message: 'Email is required.' }),
+    password: passwordValidation,
+    role: z.enum(['admin', 'user']).default('user'),
+  }),
 });
 
 export const updateUserValidationSchema = z.object({
-  firstName: z
-    .string()
-    .trim()
-    .min(1, { message: 'First name cannot be empty.' })
-    .optional(),
-  lastName: z
-    .string()
-    .trim()
-    .min(1, { message: 'Last name cannot be empty.' })
-    .optional(),
-  email: z
-    .string()
-    .trim()
-    .email({ message: 'Please enter a valid email address.' })
-    .optional(),
-  password: passwordValidation.optional(),
-  role: z.enum(['admin', 'user']).optional(),
+  body: z.object({
+    firstName: z
+      .string()
+      .trim()
+      .min(1, { message: 'First name cannot be empty.' })
+      .optional(),
+    lastName: z
+      .string()
+      .trim()
+      .min(1, { message: 'Last name cannot be empty.' })
+      .optional(),
+    email: z
+      .string()
+      .trim()
+      .email({ message: 'Please enter a valid email address.' })
+      .optional(),
+    password: passwordValidation.optional(),
+    role: z.enum(['admin', 'user']).optional(),
+  }),
 });
