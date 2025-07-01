@@ -28,6 +28,18 @@ const userSchema = new Schema<TUser, UserModel>(
       enum: ['admin', 'user'],
       default: 'user',
     },
+    passwordChagedAt: {
+      type: Date,
+      default: null,
+    },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
@@ -46,6 +58,15 @@ userSchema.statics.isPasswordMatched = async function (
   hashedPassword: string,
 ) {
   return await bcrypt.compare(plainTextPassword, hashedPassword);
+};
+
+userSchema.statics.isJWTIssuedBeforePasswordChanged = async function (
+  passwordChangedTimeStamp: Date,
+  jwtIssuedTimeStamp: number,
+) {
+  const passwordChangedTime =
+    new Date(passwordChangedTimeStamp).getTime() / 1000;
+  return jwtIssuedTimeStamp < passwordChangedTime;
 };
 
 userSchema.pre('save', async function (next) {

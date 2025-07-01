@@ -1,4 +1,5 @@
 import { Model, Types } from 'mongoose';
+import { USER_ROLE } from './user.const';
 
 export type TUser = {
   _id?: Types.ObjectId;
@@ -7,6 +8,9 @@ export type TUser = {
   email: string;
   password: string;
   role?: 'admin' | 'user';
+  isBlocked?: boolean;
+  passwordChagedAt?: Date;
+  isDeleted?: boolean;
 };
 
 export interface UserModel extends Model<TUser> {
@@ -15,4 +19,11 @@ export interface UserModel extends Model<TUser> {
     plainTextPassword: string,
     hashedPassword: string,
   ): Promise<boolean>;
+
+  isJWTIssuedBeforePasswordChanged(
+    passwordChangedTimeStamp: Date,
+    jwtIssuedTimeStamp: number,
+  ): boolean;
 }
+
+export type TUserRole = keyof typeof USER_ROLE;

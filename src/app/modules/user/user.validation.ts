@@ -30,6 +30,8 @@ export const createUserValidationSchema = z.object({
       .nonempty({ message: 'Email is required.' }),
     password: passwordValidation,
     role: z.enum(['admin', 'user']).default('user'),
+    isBlocked: z.boolean().optional().default(false),
+    isDeleted: z.boolean().optional().default(false),
   }),
 });
 
@@ -52,5 +54,7 @@ export const updateUserValidationSchema = z.object({
       .optional(),
     password: passwordValidation.optional(),
     role: z.enum(['admin', 'user']).optional(),
+    isBlocked: z.boolean().optional(),
+    isDeleted: z.boolean().optional(),
   }),
 });
