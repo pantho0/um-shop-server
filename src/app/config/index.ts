@@ -8,5 +8,11 @@ export default {
   port: process.env.PORT,
   db_url: process.env.DB_URL,
   salt_round: process.env.BCRYPT_SALT,
-  jwt_secret: process.env.JWT_SECRET,
+  jwt_access_secret: process.env.JWT_ACCESS_SECRET,
+  jwt_refresh_secret: process.env.JWT_REFRESH_SECRET,
+  jwt_acces_exp: process.env.JWT_ACCESS_SECRET_EXP,
+  jwt_refresh_exp: process.env.JWT_REFRESH_SECRET_EXP,
+  nodemailer_gmail: process.env.NODEMAILER_GMAIL,
+  nodemailer_gmail_pass: process.env.NODEMAILER_GMAIL_PASS,
+  reset_password_link: process.env.RESET_UI_LINK,
 };
