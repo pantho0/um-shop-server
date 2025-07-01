@@ -38,50 +38,53 @@ const orderedProductValidationSchema = z.object({
 });
 
 export const createOrderValidationSchema = z.object({
-  userId: z
-    .string()
-    .trim()
-    .min(1, { message: 'User ID cannot be empty.' })
-    .nonempty({ message: 'User ID is required for the order.' })
-    .refine(val => /^[0-9a-fA-F]{24}$/.test(val), {
-      message: 'User ID must be a valid MongoDB ObjectId string.',
-    }),
-  dist: z
-    .string()
-    .trim()
-    .min(1, { message: 'Delivery district/type cannot be empty.' })
-    .nonempty({ message: 'Delivery district/type is required.' }),
-  address: z
-    .string()
-    .trim()
-    .min(1, { message: 'Delivery address cannot be empty.' })
-    .nonempty({ message: 'Delivery address is required.' }),
-  grand_total: z
-    .number()
-    .min(0, { message: 'Grand total cannot be negative.' })
-    .refine(val => typeof val === 'number' && !isNaN(val), {
-      message: 'Grand total must be a valid number.',
-    }),
-  isConfirmed: z.boolean().default(false),
-  isDelivered: z.boolean().default(false),
-  isPaid: z.boolean().default(false),
-  paymentType: z
-    .string()
-    .trim()
-    .min(1, { message: 'Payment type cannot be empty.' })
-    .nonempty({ message: 'Payment type is required.' }),
-  status: z
-    .string()
-    .trim()
-    .min(1, { message: 'Status cannot be empty.' })
-    .nonempty({ message: 'Status is required.' }),
-  orderedProducts: z
-    .array(orderedProductValidationSchema)
-    .min(1, { message: 'An order must contain at least one product.' }),
+  body: z.object({
+    userId: z
+      .string()
+      .trim()
+      .min(1, { message: 'User ID cannot be empty.' })
+      .nonempty({ message: 'User ID is required for the order.' })
+      .refine(val => /^[0-9a-fA-F]{24}$/.test(val), {
+        message: 'User ID must be a valid MongoDB ObjectId string.',
+      }),
+    dist: z
+      .string()
+      .trim()
+      .min(1, { message: 'Delivery district/type cannot be empty.' })
+      .nonempty({ message: 'Delivery district/type is required.' }),
+    address: z
+      .string()
+      .trim()
+      .min(1, { message: 'Delivery address cannot be empty.' })
+      .nonempty({ message: 'Delivery address is required.' }),
+    grand_total: z
+      .number()
+      .min(0, { message: 'Grand total cannot be negative.' })
+      .refine(val => typeof val === 'number' && !isNaN(val), {
+        message: 'Grand total must be a valid number.',
+      }),
+    isConfirmed: z.boolean().default(false),
+    isDelivered: z.boolean().default(false),
+    isPaid: z.boolean().default(false),
+    paymentType: z
+      .string()
+      .trim()
+      .min(1, { message: 'Payment type cannot be empty.' })
+      .nonempty({ message: 'Payment type is required.' }),
+    status: z
+      .string()
+      .trim()
+      .min(1, { message: 'Status cannot be empty.' })
+      .nonempty({ message: 'Status is required.' }),
+    orderedProducts: z
+      .array(orderedProductValidationSchema)
+      .min(1, { message: 'An order must contain at least one product.' }),
+  }),
 });
 
 export const updateOrderValidationSchema = z.object({
-  userId: z
+  body: z.object({
+    userId: z
     .string()
     .trim()
     .min(1, { message: 'User ID cannot be empty.' })
@@ -123,4 +126,5 @@ export const updateOrderValidationSchema = z.object({
     .array(orderedProductValidationSchema)
     .min(1, { message: 'An order must contain at least one product.' })
     .optional(),
+  }),
 });

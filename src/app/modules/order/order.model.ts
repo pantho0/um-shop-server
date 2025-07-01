@@ -73,6 +73,7 @@ const orderSchema = new Schema<TOrder>(
     },
     paymentType: {
       type: String,
+      default: 'cash on delivery',
       required: [true, 'Payment type is required for the order'],
     },
     status: {
