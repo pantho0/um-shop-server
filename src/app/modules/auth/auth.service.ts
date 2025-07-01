@@ -4,6 +4,8 @@ import { User } from '../user/user.model';
 import { TLogin } from './auth.interface';
 import { createToken } from './auth.utils';
 import config from '../../config';
+import { JwtPayload } from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 const loginUser = async (payload: TLogin) => {
   const user = await User.isUserExist(payload.email);
@@ -30,6 +32,31 @@ const loginUser = async (payload: TLogin) => {
   };
 };
 
+const changePasswordIntoDB = async (
+  userInfo: JwtPayload,
+  payload: { oldPassword: string; newPassword: string },
+) => {
+  const user = await User.isUserExist(userInfo.email);
+  if (!user) throw new AppError(status.NOT_FOUND, 'User not found');
+  if (user?.isBlocked)
+    throw new AppError(status.UNAUTHORIZED, 'User is blocked');
+  if (user?.isDeleted)
+    throw new AppError(status.UNAUTHORIZED, 'User is deleted');
+  if (!User.isPasswordMatched(payload.oldPassword, user.password))
+    throw new AppError(status.UNAUTHORIZED, 'Password is incorrect');
+  const newHashedPassword = await bcrypt.hash(
+    payload.newPassword,
+    Number(config.salt_round),
+  );
+  await User.findOneAndUpdate(
+    { email: userInfo.email, role: userInfo.role },
+    { password: newHashedPassword, passwordChagedAt: new Date() },
+    { new: true },
+  );
+  return null;
+};
+
 export const AuthServices = {
   loginUser,
+  changePasswordIntoDB,
 };

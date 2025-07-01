@@ -7,7 +7,7 @@ import auth from '../../middlewares/auth';
 
 const router = Router();
 
-router.get('/', UserControllers.getAllUser);
+router.get('/', auth(USER_ROLE.admin), UserControllers.getAllUser);
 router.get('/me', auth(USER_ROLE.admin, USER_ROLE.user), UserControllers.getMe);
 router.post(
   '/create-user',
