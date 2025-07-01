@@ -12,7 +12,6 @@ router.get('/me', auth(USER_ROLE.admin, USER_ROLE.user), UserControllers.getMe);
 router.post(
   '/create-user',
   validateRequest(createUserValidationSchema),
-  auth(USER_ROLE.admin),
   UserControllers.createUser,
 );
 

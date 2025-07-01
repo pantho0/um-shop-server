@@ -13,7 +13,7 @@ const loginUser = async (payload: TLogin) => {
     throw new AppError(status.NOT_FOUND, 'User not found');
   }
 
-  if (!User.isPasswordMatched(payload.password, user.password)) {
+  if (!(await User.isPasswordMatched(payload.password, user.password))) {
     throw new AppError(status.UNAUTHORIZED, 'Password is incorrect');
   }
 
@@ -42,7 +42,7 @@ const changePasswordIntoDB = async (
     throw new AppError(status.UNAUTHORIZED, 'User is blocked');
   if (user?.isDeleted)
     throw new AppError(status.UNAUTHORIZED, 'User is deleted');
-  if (!User.isPasswordMatched(payload.oldPassword, user.password))
+  if (!(await User.isPasswordMatched(payload.oldPassword, user.password)))
     throw new AppError(status.UNAUTHORIZED, 'Password is incorrect');
   const newHashedPassword = await bcrypt.hash(
     payload.newPassword,

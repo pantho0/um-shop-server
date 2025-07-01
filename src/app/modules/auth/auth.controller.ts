@@ -5,8 +5,7 @@ import status from 'http-status';
 import config from '../../config';
 
 const login = catchAsync(async (req, res) => {
-  const { email, password } = req.body;
-  const result = await AuthServices.loginUser({ email, password });
+  const result = await AuthServices.loginUser(req.body);
   res.cookie('refreshToken', result.refreshToken, {
     secure: config.node_env === 'production',
     httpOnly: true,
