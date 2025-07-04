@@ -10,11 +10,13 @@ const ProductSchema = new Schema<IProduct>(
       required: [true, 'Product title is required'],
     },
     parentCategory: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'ParentCategory',
       required: [true, 'Parent category is required'],
     },
     subCategory: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'SubCategory',
       required: [true, 'Sub category is required'],
     },
     variant_color: {

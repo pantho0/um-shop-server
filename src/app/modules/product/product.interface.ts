@@ -1,9 +1,9 @@
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export interface IProduct extends Document {
   title: string;
-  parentCategory: string;
-  subCategory: string;
+  parentCategory: Types.ObjectId;
+  subCategory: Types.ObjectId;
   variant_color: string[];
   size: string[];
   slug?: string;

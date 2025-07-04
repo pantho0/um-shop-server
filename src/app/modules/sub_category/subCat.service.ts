@@ -11,7 +11,13 @@ const getAllSubCategoryFromDB = async () => {
   return result;
 };
 
+const getSubCategoryByParentIdFromDB = async (parentId: string) => {
+  const result = await SubCategory.find({ parentCategory: parentId });
+  return result;
+};
+
 export const SubCategoryService = {
   createSubCategoryIntoDB,
   getAllSubCategoryFromDB,
+  getSubCategoryByParentIdFromDB,
 };

@@ -11,7 +11,19 @@ const createProductIntoDB = async (payload: IProduct) => {
 };
 
 const getAllProductFromDB = async (query: Record<string, unknown>) => {
-  const productQuery = new QueryBuilder(Product.find(), query)
+  const productQuery = new QueryBuilder(
+    Product.find().populate([
+      {
+        path: 'parentCategory',
+        select: ['name', 'slug'],
+      },
+      {
+        path: 'subCategory',
+        select: ['name', 'slug'],
+      },
+    ]),
+    query,
+  )
     .search(productSearchableFields)
     .filter()
     .sort()
