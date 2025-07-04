@@ -5,6 +5,7 @@ import { ProductRoutes } from '../modules/product/product.route';
 import { ReviewRoutes } from '../modules/review/review.route';
 import { OrderRoutes } from '../modules/order/order.route';
 import { ParentCategoryRoutes } from '../modules/parent_category/parentCat.route';
+import { subCategoryRoutes } from '../modules/sub_category/subCat.route';
 
 const router = Router();
 
@@ -32,6 +33,10 @@ const moduleRoutes = [
   {
     path: '/parent-categories',
     route: ParentCategoryRoutes,
+  },
+  {
+    path: '/sub-categories',
+    route: subCategoryRoutes,
   },
 ];
 
