@@ -4,6 +4,7 @@ import { AuthRoutes } from '../modules/auth/auth.route';
 import { ProductRoutes } from '../modules/product/product.route';
 import { ReviewRoutes } from '../modules/review/review.route';
 import { OrderRoutes } from '../modules/order/order.route';
+import { ParentCategoryRoutes } from '../modules/parent_category/parentCat.route';
 
 const router = Router();
 
@@ -27,6 +28,10 @@ const moduleRoutes = [
   {
     path: '/orders',
     route: OrderRoutes,
+  },
+  {
+    path: '/parent-categories',
+    route: ParentCategoryRoutes,
   },
 ];
 
