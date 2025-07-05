@@ -40,6 +40,13 @@ class QueryBuilder<T> {
 
     const conditions: Record<string, any> = { ...queryObj };
 
+    if (conditions.parentCategory && Array.isArray(conditions.parentCategory)) {
+      conditions.parentCategory = { $in: conditions.parentCategory };
+    }
+    if (conditions.subCategory && Array.isArray(conditions.subCategory)) {
+      conditions.subCategory = { $in: conditions.subCategory };
+    }
+
     const minPrice = parseFloat(this.query.minPrice as string);
     const maxPrice = parseFloat(this.query.maxPrice as string);
 
