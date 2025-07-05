@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ParentCategory } from './../modules/parent_category/parentCat.model';
 import { FilterQuery, Query } from 'mongoose';
 
 class QueryBuilder<T> {
@@ -25,6 +27,8 @@ class QueryBuilder<T> {
   filter() {
     const queryObj = { ...this.query };
     const excludeFields = [
+      'minPrice',
+      'maxPrice',
       'searchTerm',
       'sortBy',
       'sortOrder',
@@ -33,7 +37,23 @@ class QueryBuilder<T> {
       'fields',
     ];
     excludeFields.forEach(el => delete queryObj[el]);
-    this.modelQuery = this.modelQuery.find(queryObj);
+
+    const conditions: Record<string, any> = { ...queryObj };
+
+    const minPrice = parseFloat(this.query.minPrice as string);
+    const maxPrice = parseFloat(this.query.maxPrice as string);
+
+    if (!isNaN(minPrice) || !isNaN(maxPrice)) {
+      conditions.price = {};
+      if (!isNaN(minPrice)) {
+        conditions.price.$gte = minPrice;
+      }
+      if (!isNaN(maxPrice)) {
+        conditions.price.$lte = maxPrice;
+      }
+    }
+
+    this.modelQuery = this.modelQuery.find(conditions);
     return this;
   }
   sort() {
