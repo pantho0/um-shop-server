@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ParentCategory } from './../modules/parent_category/parentCat.model';
+
 import { FilterQuery, Query } from 'mongoose';
 
 class QueryBuilder<T> {

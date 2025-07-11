@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import status from 'http-status';
 import AppError from '../errors/AppError';
 import { TUserRole } from '../modules/user/user.interface';
@@ -11,11 +13,15 @@ const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req, res, next) => {
     const token = req.headers.authorization;
     if (!token) throw new AppError(status.UNAUTHORIZED, 'Unauthorized');
-
-    const decoded = verifyToken(
-      token,
-      config.jwt_secret as string,
-    ) as JwtPayload;
+    let decoded;
+    try {
+      decoded = verifyToken(
+        token,
+        config.jwt_access_secret as string,
+      ) as JwtPayload;
+    } catch (error: any) {
+      throw new AppError(status.UNAUTHORIZED, 'You are not authorized');
+    }
 
     const { email, role, iat } = decoded;
 

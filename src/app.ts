@@ -5,14 +5,19 @@ import router from './app/routes';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  }),
+);
 
 app.use('/api/v1', router);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('UMSHOP SERVER IS RUNNING');
 });
-  
-app.use(globalErrorHandler)
+
+app.use(globalErrorHandler);
 
 export default app;
