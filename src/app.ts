@@ -1,10 +1,12 @@
 import express, { Application, Request, Response } from 'express';
 const app: Application = express();
+import cookieParser from 'cookie-parser'
 import cors from 'cors';
 import router from './app/routes';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
 app.use(express.json());
+app.use(cookieParser())
 app.use(
   cors({
     origin: ['http://localhost:3000'],
