@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', ProductControllers.getAllProduct);
 router.post(
   '/create-product',
-  auth(USER_ROLE.admin),
+  // auth(USER_ROLE.admin),
   ProductControllers.createProduct,
 );
 router.get('/:slug', ProductControllers.getProductById);

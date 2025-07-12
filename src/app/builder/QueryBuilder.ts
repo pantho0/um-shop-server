@@ -46,7 +46,6 @@ class QueryBuilder<T> {
     if (conditions.subCategory && Array.isArray(conditions.subCategory)) {
       conditions.subCategory = { $in: conditions.subCategory };
     }
-
     const minPrice = parseFloat(this.query.minPrice as string);
     const maxPrice = parseFloat(this.query.maxPrice as string);
 
