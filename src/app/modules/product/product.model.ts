@@ -1,7 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { model, Schema } from 'mongoose';
-import { IProduct } from './product.interface';
+import { IProduct, Variant } from './product.interface';
 import slugify from 'slugify';
+
+const VariantSchema = new Schema<Variant>({
+  sku: {
+    type: String,
+    required: true,
+  },
+  color: {
+    type: String,
+    required: true,
+  },
+  size: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  stock: {
+    type: Number,
+    required: true,
+  },
+});
 
 const ProductSchema = new Schema<IProduct>(
   {
@@ -19,12 +42,8 @@ const ProductSchema = new Schema<IProduct>(
       ref: 'SubCategory',
       required: [true, 'Sub category is required'],
     },
-    variant_color: {
-      type: [String],
-      required: true,
-    },
-    size: {
-      type: [String],
+    variants: {
+      type: [VariantSchema],
       required: true,
     },
     slug: {

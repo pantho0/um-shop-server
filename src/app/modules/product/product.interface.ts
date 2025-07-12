@@ -1,11 +1,18 @@
 import { Document, Types } from 'mongoose';
 
+export interface Variant {
+  sku: string;
+  color: string;
+  size: string;
+  price: number;
+  stock: number;
+}
+
 export interface IProduct extends Document {
   title: string;
   parentCategory: Types.ObjectId;
   subCategory: Types.ObjectId;
-  variant_color: string[];
-  size: string[];
+  variants: Variant[];
   slug?: string;
   details: string;
   price: number;
