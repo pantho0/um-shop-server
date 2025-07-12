@@ -55,11 +55,7 @@ const ProductSchema = new Schema<IProduct>(
       type: String,
       required: [true, 'Product details are required'],
     },
-    price: {
-      type: Number,
-      required: [true, 'Product price is required'],
-      min: [0, 'Price cannot be negative'],
-    },
+
     images: {
       type: [String],
       required: true,

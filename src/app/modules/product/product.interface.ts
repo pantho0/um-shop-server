@@ -15,6 +15,5 @@ export interface IProduct extends Document {
   variants: Variant[];
   slug?: string;
   details: string;
-  price: number;
   images: string[];
 }
