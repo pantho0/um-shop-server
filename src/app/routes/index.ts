@@ -39,10 +39,6 @@ const moduleRoutes = [
     path: '/sub-categories',
     route: subCategoryRoutes,
   },
-  {
-    path: '/cloudinary',
-    route: CloudinaryRoute,
-  },
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));
