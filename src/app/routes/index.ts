@@ -6,7 +6,7 @@ import { ReviewRoutes } from '../modules/review/review.route';
 import { OrderRoutes } from '../modules/order/order.route';
 import { ParentCategoryRoutes } from '../modules/parent_category/parentCat.route';
 import { subCategoryRoutes } from '../modules/sub_category/subCat.route';
-import { CloudinaryRoute } from '../modules/cloudinary/cloudinary.route';
+
 
 const router = Router();
 
