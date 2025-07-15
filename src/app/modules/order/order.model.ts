@@ -49,6 +49,10 @@ const orderedProductSchema = new Schema<IOrderedItem>(
 
 const orderSchema = new Schema<IOrder>(
   {
+    orderId: {
+      type: String,
+      required: true,
+    },
     fullName: {
       type: String,
       required: [true, 'Full name is required'],

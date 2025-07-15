@@ -1,6 +1,7 @@
 import { Types } from 'mongoose';
 
 export interface IOrder {
+  orderId: string;
   fullName: string;
   mobileNumber: string;
   email: string;

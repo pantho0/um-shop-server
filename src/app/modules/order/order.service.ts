@@ -1,3 +1,4 @@
+import status from 'http-status';
 import { IOrder } from './order.interface';
 import { Order } from './order.model';
 
@@ -11,7 +12,17 @@ const getAllOrdersFromDB = async () => {
   return result;
 };
 
+const updateOrderStatus = async (orderId: string, status: string) => {
+  const result = await Order.findOneAndUpdate(
+    { orderId },
+    { status: status },
+    { new: true },
+  );
+  return result;
+};
+
 export const OrderServices = {
   createOrderIntoDB,
   getAllOrdersFromDB,
+  updateOrderStatus,
 };

@@ -15,6 +15,7 @@ export const orderedProductSchema = z.object({
 // Zod schema for the main order
 export const orderSchema = z.object({
   body: z.object({
+    orderId: z.string().trim().min(1, 'Order ID is required'),
     fullName: z.string().trim().min(1, 'Full name is required'),
     mobileNumber: z.string().trim().min(1, 'Mobile number is required'),
     email: z
