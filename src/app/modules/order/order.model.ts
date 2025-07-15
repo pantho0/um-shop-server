@@ -1,35 +1,42 @@
 import { model, Schema } from 'mongoose';
-import { TOrder, TOrderedProduct } from './order.interface';
+import { IOrder, IOrderedItem } from './order.interface';
 
-const orderedProductSchema = new Schema<TOrderedProduct>(
+const orderedProductSchema = new Schema<IOrderedItem>(
   {
-    productId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Product',
-      required: [true, 'Product ID is required for ordered product'],
-    },
-    size: {
+    id: {
       type: String,
-      required: [true, 'Size is required for ordered product'],
+      required: [true, 'Product ID is required'],
+      trim: true,
     },
-    variant_color: {
+    name: {
       type: String,
-      required: [true, 'Variant color is required for ordered product'],
+      required: [true, 'Product name is required'],
+      trim: true,
     },
-    u_price: {
+    price: {
       type: Number,
-      required: [true, 'Unit price is required for ordered product'],
-      min: [0, 'Unit price cannot be negative'],
+      required: [true, 'Product price is required'],
+      min: [0, 'Product price cannot be negative'],
     },
-    qty: {
-      type: Number,
-      required: [true, 'Quantity is required for ordered product'],
-      min: [1, 'Quantity must be at least 1'],
+    image: {
+      type: String,
+      required: [true, 'Product image is required'],
+      trim: true,
     },
-    totalPrice: {
+    color: {
+      type: String,
+      required: [true, 'Product color is required'],
+      trim: true,
+    },
+    model: {
+      type: String,
+      required: [true, 'Product model is required'],
+      trim: true,
+    },
+    quantity: {
       type: Number,
-      required: [true, 'Total price for ordered product is required'],
-      min: [0, 'Total price cannot be negative'],
+      required: [true, 'Product quantity is required'],
+      min: [1, 'Product quantity must be at least 1'],
     },
   },
   {
@@ -37,64 +44,63 @@ const orderedProductSchema = new Schema<TOrderedProduct>(
   },
 );
 
-const orderSchema = new Schema<TOrder>(
+const orderSchema = new Schema<IOrder>(
   {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: [true, 'User ID is required for the order'],
-    },
-    dist: {
+    fullName: {
       type: String,
-      required: [true, 'Delivery district/type is required'],
+      required: [true, 'Full name is required'],
       trim: true,
     },
-    address: {
+    mobileNumber: {
       type: String,
-      required: [true, 'Delivery address is required'],
+      required: [true, 'Mobile number is required'],
       trim: true,
     },
-    grand_total: {
-      type: Number,
-      required: [true, 'Grand total is required for the order'],
-      min: [0, 'Grand total cannot be negative'],
-    },
-    isConfirmed: {
-      type: Boolean,
-      default: false,
-    },
-    isDelivered: {
-      type: Boolean,
-      default: false,
-    },
-    isPaid: {
-      type: Boolean,
-      default: false,
-    },
-    paymentType: {
+    email: {
       type: String,
-      default: 'cash on delivery',
-      required: [true, 'Payment type is required for the order'],
+      required: [true, 'Email is required'],
+      trim: true,
     },
-    status: {
+    district: {
       type: String,
-      enum: ['pending', 'delivered'],
-      default: 'pending',
+      required: [true, 'District is required'],
+      trim: true,
     },
-    orderedProducts: {
+    upazilla: {
+      type: String,
+      required: [true, 'Upazilla is required'],
+      trim: true,
+    },
+    detailsInformation: {
+      type: String,
+      required: [true, 'Details information is required'],
+      trim: true,
+    },
+    paymentMethod: {
+      type: String,
+      required: [true, 'Payment method is required'],
+      trim: true,
+    },
+    orderedItems: {
       type: [orderedProductSchema],
-      required: [true, 'Ordered products list cannot be empty'],
+      required: [true, 'Ordered items list cannot be empty'],
       validate: {
-        validator: function (v: TOrderedProduct[]) {
+        validator: function (v: IOrderedItem[]) {
           return v.length > 0;
         },
         message: 'An order must contain at least one product.',
       },
     },
+    grandTotal: {
+      type: Number,
+      required: [true, 'Grand total is required'],
+      min: [0, 'Grand total cannot be negative'],
+    },
   },
+
   {
     timestamps: true,
   },
 );
 
-export const Order = model<TOrder>('Order', orderSchema);
+export const Order = model<IOrder>('Order', orderSchema);
