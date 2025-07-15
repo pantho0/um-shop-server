@@ -4,9 +4,12 @@ import { IOrder, IOrderedItem } from './order.interface';
 const orderedProductSchema = new Schema<IOrderedItem>(
   {
     id: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: [true, 'Product ID is required'],
       trim: true,
+    },
+    sku: {
+      type: String,
     },
     name: {
       type: String,
@@ -19,7 +22,7 @@ const orderedProductSchema = new Schema<IOrderedItem>(
       min: [0, 'Product price cannot be negative'],
     },
     image: {
-      type: String,
+      type: [String],
       required: [true, 'Product image is required'],
       trim: true,
     },
@@ -80,6 +83,12 @@ const orderSchema = new Schema<IOrder>(
       type: String,
       required: [true, 'Payment method is required'],
       trim: true,
+    },
+    status: {
+      type: String,
+      required: [true, 'Status should be given'],
+      default: 'Pending',
+      enum: ['Pending', 'In progress', 'Delivered', 'Canceled'],
     },
     orderedItems: {
       type: [orderedProductSchema],

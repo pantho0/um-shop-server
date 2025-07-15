@@ -7,16 +7,7 @@ const createOrderIntoDB = async (payload: IOrder) => {
 };
 
 const getAllOrdersFromDB = async () => {
-  const result = await Order.find().populate([
-    {
-      path: 'userId',
-      select: 'firstName lastName email',
-    },
-    {
-      path: 'orderedProducts.productId',
-      select: 'title price',
-    },
-  ]);
+  const result = await Order.find();
   return result;
 };
 

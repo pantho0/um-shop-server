@@ -1,130 +1,40 @@
 import { z } from 'zod';
 
-const orderedProductValidationSchema = z.object({
-  productId: z
-    .string()
-    .trim()
-    .min(1, { message: 'Product ID cannot be empty.' })
-    .nonempty({ message: 'Product ID is required for ordered product.' })
-    .refine(val => /^[0-9a-fA-F]{24}$/.test(val), {
-      message: 'Product ID must be a valid MongoDB ObjectId string.',
-    }),
-  size: z
-    .string()
-    .trim()
-    .min(1, { message: 'Size cannot be empty.' })
-    .nonempty({ message: 'Size is required for ordered product.' }),
-  variant_color: z
-    .string()
-    .trim()
-    .min(1, { message: 'Variant color cannot be empty.' })
-    .nonempty({ message: 'Variant color is required for ordered product.' }),
-  u_price: z
-    .number()
-    .min(0, { message: 'Unit price cannot be negative.' })
-    .refine(val => typeof val === 'number' && !isNaN(val), {
-      message: 'Unit price must be a valid number.',
-    }),
-  qty: z
-    .number()
-    .int({ message: 'Quantity must be an integer.' })
-    .min(1, { message: 'Quantity must be at least 1.' }),
-  totalPrice: z
-    .number()
-    .min(0, { message: 'Total price cannot be negative.' })
-    .refine(val => typeof val === 'number' && !isNaN(val), {
-      message: 'Total price must be a valid number.',
-    }),
+// Zod schema for individual ordered products
+export const orderedProductSchema = z.object({
+  id: z.string().trim().min(1, 'Product ID is required'),
+  sku: z.string(), // Assuming ObjectId is represented as a string
+  name: z.string().trim().min(1, 'Product name is required'),
+  price: z.number().min(0, 'Product price cannot be negative'),
+  image: z.string(),
+  color: z.string().trim().min(1, 'Product color is required'),
+  model: z.string().trim().min(1, 'Product model is required'),
+  quantity: z.number().min(1, 'Product quantity must be at least 1'),
 });
 
-export const createOrderValidationSchema = z.object({
+// Zod schema for the main order
+export const orderSchema = z.object({
   body: z.object({
-    userId: z
+    fullName: z.string().trim().min(1, 'Full name is required'),
+    mobileNumber: z.string().trim().min(1, 'Mobile number is required'),
+    email: z
       .string()
       .trim()
-      .min(1, { message: 'User ID cannot be empty.' })
-      .nonempty({ message: 'User ID is required for the order.' })
-      .refine(val => /^[0-9a-fA-F]{24}$/.test(val), {
-        message: 'User ID must be a valid MongoDB ObjectId string.',
-      }),
-    dist: z
+      .email('Invalid email format')
+      .min(1, 'Email is required'),
+    district: z.string().trim().min(1, 'District is required'),
+    upazilla: z.string().trim().min(1, 'Upazilla is required'),
+    detailsInformation: z
       .string()
       .trim()
-      .min(1, { message: 'Delivery district/type cannot be empty.' })
-      .nonempty({ message: 'Delivery district/type is required.' }),
-    address: z
-      .string()
-      .trim()
-      .min(1, { message: 'Delivery address cannot be empty.' })
-      .nonempty({ message: 'Delivery address is required.' }),
-    grand_total: z
-      .number()
-      .min(0, { message: 'Grand total cannot be negative.' })
-      .refine(val => typeof val === 'number' && !isNaN(val), {
-        message: 'Grand total must be a valid number.',
-      }),
-    isConfirmed: z.boolean().default(false),
-    isDelivered: z.boolean().default(false),
-    isPaid: z.boolean().default(false),
-    paymentType: z
-      .string()
-      .trim()
-      .min(1, { message: 'Payment type cannot be empty.' })
-      .nonempty({ message: 'Payment type is required.' }),
+      .min(1, 'Details information is required'),
+    paymentMethod: z.string().trim().min(1, 'Payment method is required'),
     status: z
-      .string()
-      .trim()
-      .min(1, { message: 'Status cannot be empty.' })
-      .nonempty({ message: 'Status is required.' }),
-    orderedProducts: z
-      .array(orderedProductValidationSchema)
-      .min(1, { message: 'An order must contain at least one product.' }),
-  }),
-});
-
-export const updateOrderValidationSchema = z.object({
-  body: z.object({
-    userId: z
-    .string()
-    .trim()
-    .min(1, { message: 'User ID cannot be empty.' })
-    .refine(val => /^[0-9a-fA-F]{24}$/.test(val), {
-      message: 'User ID must be a valid MongoDB ObjectId string.',
-    })
-    .optional(),
-  dist: z
-    .string()
-    .trim()
-    .min(1, { message: 'Delivery district/type cannot be empty.' })
-    .optional(),
-  address: z
-    .string()
-    .trim()
-    .min(1, { message: 'Delivery address cannot be empty.' })
-    .optional(),
-  grand_total: z
-    .number()
-    .min(0, { message: 'Grand total cannot be negative.' })
-    .refine(val => typeof val === 'number' && !isNaN(val), {
-      message: 'Grand total must be a valid number.',
-    })
-    .optional(),
-  isConfirmed: z.boolean().optional(),
-  isDelivered: z.boolean().optional(),
-  isPaid: z.boolean().optional(),
-  paymentType: z
-    .string()
-    .trim()
-    .min(1, { message: 'Payment type cannot be empty.' })
-    .optional(),
-  status: z
-    .string()
-    .trim()
-    .min(1, { message: 'Status cannot be empty.' })
-    .optional(),
-  orderedProducts: z
-    .array(orderedProductValidationSchema)
-    .min(1, { message: 'An order must contain at least one product.' })
-    .optional(),
+      .enum(['Pending', 'In progress', 'Delivered', 'Canceled'])
+      .default('Pending'),
+    orderedItems: z
+      .array(orderedProductSchema)
+      .min(1, 'An order must contain at least one product.'),
+    grandTotal: z.number().min(0, 'Grand total cannot be negative'),
   }),
 });

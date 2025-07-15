@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export interface IOrder {
   fullName: string;
   mobileNumber: string;
@@ -6,15 +8,17 @@ export interface IOrder {
   upazilla: string;
   detailsInformation: string;
   paymentMethod: string;
+  status: 'Pending' | 'In progress' | 'Delivered' | 'Canceled';
   orderedItems: IOrderedItem[];
   grandTotal: number;
 }
 
 export interface IOrderedItem {
-  id: string;
+  id: Types.ObjectId;
+  sku: string;
   name: string;
   price: number;
-  image: string;
+  image: string[] | string;
   color: string;
   model: string;
   quantity: number;
