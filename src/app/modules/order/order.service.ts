@@ -12,10 +12,10 @@ const getAllOrdersFromDB = async () => {
   return result;
 };
 
-const updateOrderStatus = async (orderId: string, status: string) => {
-  const result = await Order.findOneAndUpdate(
-    { orderId },
-    { status: status },
+const updateOrderStatus = async (orderId: string, statusOption: string) => {
+  const result = await Order.findByIdAndUpdate(
+    { _id: orderId },
+    { $set: { status: statusOption } },
     { new: true },
   );
   return result;
