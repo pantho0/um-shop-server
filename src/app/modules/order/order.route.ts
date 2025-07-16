@@ -11,6 +11,6 @@ router.post(
   validateRequest(orderSchema),
   OrderControllers.createOrder,
 );
-router.patch('/change-order-status', OrderControllers.updateOrderStatus);
+router.put('/change-order-status', OrderControllers.updateOrderStatus);
 
 export const OrderRoutes = router;

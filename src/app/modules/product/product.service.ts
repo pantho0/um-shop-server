@@ -54,8 +54,11 @@ const getAllProductFromDB = async (query: Record<string, unknown>) => {
     .sort()
     .paginate()
     .fields();
+
+  const meta = await productQuery.countTotal();
   const result = await productQuery.modelQuery;
-  return result;
+
+  return { result, meta };
 };
 
 const getProductByIdFromDB = async (slug: string) => {
