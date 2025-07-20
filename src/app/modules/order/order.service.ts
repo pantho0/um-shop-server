@@ -11,6 +11,11 @@ const getAllOrdersFromDB = async () => {
   return result;
 };
 
+const myOrdersFromDB = async (payload: string) => {
+  const result = await Order.find({ email: payload });
+  return result;
+};
+
 const updateOrderStatus = async (orderId: string, statusOption: string) => {
   const result = await Order.findByIdAndUpdate(
     { _id: orderId },
@@ -24,4 +29,5 @@ export const OrderServices = {
   createOrderIntoDB,
   getAllOrdersFromDB,
   updateOrderStatus,
+  myOrdersFromDB,
 };

@@ -6,6 +6,7 @@ import { orderSchema } from './order.validation';
 const router = Router();
 
 router.get('/', OrderControllers.getAllOrders);
+router.get('/:email', OrderControllers.getMyOrders);
 router.post(
   '/create-order',
   validateRequest(orderSchema),

@@ -23,6 +23,17 @@ const getAllOrders = catchAsync(async (req, res) => {
   });
 });
 
+const getMyOrders = catchAsync(async (req, res) => {
+  const email = req.params.email;
+  const result = await OrderServices.myOrdersFromDB(email);
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: 'Orders fetched successfully',
+    data: result,
+  });
+});
+
 const updateOrderStatus = catchAsync(async (req, res) => {
   const { orderId } = req.body;
   const { statusOption } = req.body;
@@ -39,4 +50,5 @@ export const OrderControllers = {
   createOrder,
   getAllOrders,
   updateOrderStatus,
+  getMyOrders,
 };
