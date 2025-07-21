@@ -13,5 +13,6 @@ router.post(
   OrderControllers.createOrder,
 );
 router.put('/change-order-status', OrderControllers.updateOrderStatus);
+router.delete('/:orderId', OrderControllers.cancleOrder);
 
 export const OrderRoutes = router;

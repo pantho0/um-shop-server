@@ -25,9 +25,15 @@ const updateOrderStatus = async (orderId: string, statusOption: string) => {
   return result;
 };
 
+const cancelOrderFromDB = async (orderId: string) => {
+  const result = await Order.findByIdAndDelete(orderId);
+  return result;
+};
+
 export const OrderServices = {
   createOrderIntoDB,
   getAllOrdersFromDB,
   updateOrderStatus,
   myOrdersFromDB,
+  cancelOrderFromDB,
 };
