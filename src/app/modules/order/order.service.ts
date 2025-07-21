@@ -1,3 +1,5 @@
+import status from 'http-status';
+import AppError from '../../errors/AppError';
 import { IOrder } from './order.interface';
 import { Order } from './order.model';
 
@@ -26,8 +28,19 @@ const updateOrderStatus = async (orderId: string, statusOption: string) => {
 };
 
 const cancelOrderFromDB = async (orderId: string) => {
-  const result = await Order.findByIdAndDelete(orderId);
-  return result;
+  const isOrderExist = await Order.findById(orderId);
+  if (!isOrderExist) {
+    throw new AppError(status.NOT_FOUND, 'Order not found');
+  }
+  if (isOrderExist.status === 'Pending') {
+    const result = await Order.findByIdAndDelete(orderId);
+    return result;
+  } else {
+    throw new AppError(
+      status.FORBIDDEN,
+      'You can not cancel any order when its confirmed or in-progress',
+    );
+  }
 };
 
 export const OrderServices = {
