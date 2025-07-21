@@ -22,6 +22,8 @@ const loginUser = async (payload: TLogin) => {
 
   const jwtPayload = {
     userId: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
     role: user.role,
     email: user.email,
   };
@@ -77,6 +79,8 @@ const forgetPasswordGenerator = async (payload: { email: string }) => {
 
   const jwtPayload = {
     userId: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
     role: user.role,
     email: user.email,
   };
@@ -130,7 +134,7 @@ const accessTokenWithRefreshToken = async (payload: string) => {
     throw new AppError(status.BAD_REQUEST, 'Invalid Credentials');
   }
 
-  const { userId, role, email } = decoded as JwtPayload;
+  const { userId, role, email, firstName, lastName } = decoded as JwtPayload;
 
   const user = await User.isUserExist(email);
 
@@ -140,6 +144,8 @@ const accessTokenWithRefreshToken = async (payload: string) => {
 
   const jwtPayload = {
     userId,
+    firstName,
+    lastName,
     role,
     email,
   };
