@@ -9,6 +9,8 @@ export const createToken = (
   jwtPayload: {
     userId: Types.ObjectId | undefined;
     role: 'admin' | 'user' | undefined;
+    firstName: string;
+    lastName: string;
     email: string | undefined;
   },
   secret: string,
