@@ -61,12 +61,12 @@ const changePasswordIntoDB = async (
     payload.newPassword,
     Number(config.salt_round),
   );
-  await User.findOneAndUpdate(
+  const result = await User.findOneAndUpdate(
     { email: userInfo.email, role: userInfo.role },
     { password: newHashedPassword, passwordChagedAt: new Date() },
     { new: true },
   );
-  return null;
+  return result;
 };
 
 const forgetPasswordGenerator = async (payload: { email: string }) => {

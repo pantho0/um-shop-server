@@ -9,7 +9,7 @@ const VariantSchema = new Schema<Variant>({
     required: true,
   },
   color: {
-    type: String,
+    type: [String],
     required: true,
   },
   size: {
