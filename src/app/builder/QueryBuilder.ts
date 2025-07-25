@@ -63,7 +63,7 @@ class QueryBuilder<T> {
     return this;
   }
   sort() {
-    const sortBy = this.query.sortBy as string;
+    const sortBy = (this.query.sortBy as string) || 'createdAt';
     const sortOrder = this.query.sortOrder === 'asc' ? 1 : -1;
     this.modelQuery = this.modelQuery.sort({ [sortBy]: sortOrder });
     return this;
