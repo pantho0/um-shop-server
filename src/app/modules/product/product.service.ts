@@ -72,10 +72,14 @@ const getProductByIdFromDB = async (slug: string) => {
   return result;
 };
 
-const updateProductByIdFromDB = async (slug: string, payload: IProduct) => {
-  const result = await Product.findOneAndUpdate({ slug }, payload, {
-    new: true,
-  });
+const updateProductByIdFromDB = async (payload: Partial<IProduct>) => {
+  const result = await Product.findOneAndUpdate(
+    { slug: payload.slug },
+    payload,
+    {
+      new: true,
+    },
+  );
   if (!result) {
     throw new AppError(
       status.NOT_FOUND,
