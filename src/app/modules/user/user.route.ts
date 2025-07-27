@@ -14,5 +14,10 @@ router.post(
   validateRequest(createUserValidationSchema),
   UserControllers.createUser,
 );
+router.put(
+  '/change-role',
+  auth(USER_ROLE.admin),
+  UserControllers.changeUserRole,
+);
 
 export const UserRoutes = router;
