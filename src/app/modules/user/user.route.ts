@@ -21,5 +21,6 @@ router.put(
   UserControllers.changeUserRole,
 );
 router.put('/block-user', auth(USER_ROLE.admin), UserControllers.blockUser);
+router.put('/delete-user', auth(USER_ROLE.admin), UserControllers.deleteUser);
 
 export const UserRoutes = router;

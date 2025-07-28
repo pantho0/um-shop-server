@@ -66,6 +66,16 @@ const blockUser = catchAsync(async (req, res) => {
   });
 });
 
+const deleteUser = catchAsync(async (req, res) => {
+  const result = await UserServices.deleteUserIntoDB(req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User isDeleted status updated successfully',
+    data: result,
+  });
+});
+
 export const UserControllers = {
   createUser,
   getAllUser,
@@ -73,4 +83,5 @@ export const UserControllers = {
   getMe,
   changeUserRole,
   blockUser,
+  deleteUser,
 };

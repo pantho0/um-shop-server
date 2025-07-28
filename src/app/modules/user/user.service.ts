@@ -57,6 +57,22 @@ const blockUserIntoDB = async (payload: { id: string }) => {
   return user;
 };
 
+const deleteUserIntoDB = async (payload: { id: string }) => {
+  const user = await User.findByIdAndUpdate(
+    payload.id,
+    [
+      {
+        $set: {
+          isDeleted: { $not: '$isDeleted' },
+        },
+      },
+    ],
+    { new: true },
+  );
+
+  return user;
+};
+
 export const UserServices = {
   createUserIntoDB,
   getAllUserFromDB,
@@ -64,4 +80,5 @@ export const UserServices = {
   getMeFromDB,
   changeUserRoleIntoDB,
   blockUserIntoDB,
+  deleteUserIntoDB,
 };
