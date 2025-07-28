@@ -46,11 +46,22 @@ const getMe = catchAsync(async (req, res) => {
 });
 
 const changeUserRole = catchAsync(async (req, res) => {
+  console.log(req.body);
   const result = await UserServices.changeUserRoleIntoDB(req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User role updated successfully',
+    data: result,
+  });
+});
+
+const blockUser = catchAsync(async (req, res) => {
+  const result = await UserServices.blockUserIntoDB(req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User isBlocked status updated successfully',
     data: result,
   });
 });
@@ -61,4 +72,5 @@ export const UserControllers = {
   getSingleUser,
   getMe,
   changeUserRole,
+  blockUser,
 };

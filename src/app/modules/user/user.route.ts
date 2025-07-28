@@ -20,5 +20,6 @@ router.put(
   auth(USER_ROLE.admin),
   UserControllers.changeUserRole,
 );
+router.put('/block-user', auth(USER_ROLE.admin), UserControllers.blockUser);
 
 export const UserRoutes = router;

@@ -41,10 +41,27 @@ const changeUserRoleIntoDB = async (payload: { id: string; role: string }) => {
   return user;
 };
 
+const blockUserIntoDB = async (payload: { id: string }) => {
+  const user = await User.findByIdAndUpdate(
+    payload.id,
+    [
+      {
+        $set: {
+          isBlocked: { $not: '$isBlocked' },
+        },
+      },
+    ],
+    { new: true },
+  );
+
+  return user;
+};
+
 export const UserServices = {
   createUserIntoDB,
   getAllUserFromDB,
   getSingleUserFromDB,
   getMeFromDB,
   changeUserRoleIntoDB,
+  blockUserIntoDB,
 };
