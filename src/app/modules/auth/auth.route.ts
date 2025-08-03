@@ -23,10 +23,6 @@ router.put(
   validateRequest(resetPasswordValidationSchema),
   AuthControllers.resetPassword,
 );
-
-router.options('/reset-password', (req, res) => {
-  res.sendStatus(200);
-});
 router.post(
   '/generate-accesstoken',
   AuthControllers.accessTokenGenerateWithRefreshToken,

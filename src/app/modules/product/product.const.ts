@@ -1,5 +1,1 @@
-export const productSearchableFields = [
-  'title',
-  'parentCategory',
-  'subCategory',
-];
+export const productSearchableFields = ['title'];
