@@ -36,11 +36,13 @@ const ProductSchema = new Schema<IProduct>(
       type: Schema.Types.ObjectId,
       ref: 'ParentCategory',
       required: [true, 'Parent category is required'],
+      index: true,
     },
     subCategory: {
       type: Schema.Types.ObjectId,
       ref: 'SubCategory',
       required: [true, 'Sub category is required'],
+      index: true,
     },
     variants: {
       type: [VariantSchema],

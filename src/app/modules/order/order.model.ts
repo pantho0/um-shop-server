@@ -52,6 +52,7 @@ const orderSchema = new Schema<IOrder>(
     orderId: {
       type: String,
       required: true,
+      index: true,
     },
     fullName: {
       type: String,
@@ -67,6 +68,7 @@ const orderSchema = new Schema<IOrder>(
       type: String,
       required: [true, 'Email is required'],
       trim: true,
+      index: true,
     },
     district: {
       type: String,
@@ -93,6 +95,7 @@ const orderSchema = new Schema<IOrder>(
       required: [true, 'Status should be given'],
       default: 'Pending',
       enum: ['Pending', 'In progress', 'Delivered', 'Canceled'],
+      index: true,
     },
     orderedItems: {
       type: [orderedProductSchema],
