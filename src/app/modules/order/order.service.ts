@@ -2,15 +2,29 @@ import status from 'http-status';
 import AppError from '../../errors/AppError';
 import { IOrder } from './order.interface';
 import { Order } from './order.model';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 const createOrderIntoDB = async (payload: IOrder) => {
   const result = await Order.create(payload);
   return result;
 };
 
-const getAllOrdersFromDB = async () => {
-  const result = await Order.find();
-  return result;
+const getAllOrdersFromDB = async (query: Record<string, unknown>) => {
+  const queryObj = { ...query };
+
+  const orderQuery = new QueryBuilder(Order.find(), queryObj)
+    .search(['orderId', 'email'])
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await orderQuery.countTotal();
+  const result = await orderQuery.modelQuery;
+  return {
+    meta,
+    data: result,
+  };
 };
 
 const myOrdersFromDB = async (payload: string) => {
