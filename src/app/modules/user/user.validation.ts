@@ -2,7 +2,10 @@ import { z } from 'zod';
 
 const passwordValidation = z
   .string()
-  .min(8, { message: 'Password must be at least 8 characters long.' })
+  .min(8, {
+    message:
+      'Password must be at least 8 characters long with capital,small,number and special character.',
+  })
   .regex(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
     {
