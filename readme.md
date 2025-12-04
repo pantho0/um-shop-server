@@ -2,7 +2,7 @@
 
 A secure and scalable **eCommerce backend system** built with **Node.js**, **Express**, and **TypeScript**, featuring **JWT authentication**, **Role-Based Access Control**, **Slugify-based automatic product slugging**, and **Nodemailer-powered password reset system**.
 
-[![Live SITE](https://umshop.vercel.app/)](#)
+[![Live SITE](https://img.shields.io/badge/Live%20API-Visit%20Now-blue?style=for-the-badge)](https://umshop.vercel.app/)
 [![Requirement Analysis](https://img.shields.io/badge/Requirement%20Analysis-View%20Docs-lightgrey?style=for-the-badge)](https://docs.google.com/document/d/1LdsUhhlyoZdZhl6cM83V-t7SGxNzBiJsgvi47d0dUZw/edit?usp=sharing)
 
 ## This backend powers a complete eCommerce infrastructure with secure authentication, product management, order handling, and user administration.
