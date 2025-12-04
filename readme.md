@@ -152,7 +152,7 @@ Fill variables:
 ## ▶️ Run the Development Server
 
 ```bash
-npm run dev
+npm run start:dev
 ```
 
 ---
@@ -161,5 +161,7 @@ npm run dev
 
 ```bash
 npm run build
-npm run start
+npm run start:prod
+
+
 ```
