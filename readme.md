@@ -1,75 +1,102 @@
 # 🛒 UMSHOP Backend – Role-Based E-commerce REST API
 
-A secure and scalable eCommerce backend built with **Node.js**, **Express**, and **TypeScript**, featuring **JWT-based authentication**, **Role-Based Access Control**, **Slugify automation**, and **Nodemailer-powered password reset**.
+A secure and scalable **eCommerce backend system** built with **Node.js**, **Express**, and **TypeScript**, featuring **JWT authentication**, **Role-Based Access Control**, **Slugify-based automatic product slugging**, and **Nodemailer-powered password reset system**.
 
----
+[![Live API](https://img.shields.io/badge/Live%20API-Visit%20Now-blue?style=for-the-badge)](#)
+[![Requirement Analysis](https://img.shields.io/badge/Requirement%20Analysis-View%20Docs-lightgrey?style=for-the-badge)](https://docs.google.com/document/d/1LdsUhhlyoZdZhl6cM83V-t7SGxNzBiJsgvi47d0dUZw/edit?usp=sharing)
 
-## 🚀 Live Demo & Documentation
+## This backend powers a complete eCommerce infrastructure with secure authentication, product management, order handling, and user administration.
 
-[![Live Site](https://umshop.vercel.app/)](#)
-[![Requirement Analysis](https://docs.google.com/document/d/1LdsUhhlyoZdZhl6cM83V-t7SGxNzBiJsgvi47d0dUZw/edit?usp=sharing)](./docs/UMSHOP.png)
+## 📘 System Diagram (Architecture Overview)
+
+A clean modular backend architecture ensuring scalability and maintainability.
+
+![UMSHOP Backend Architecture](./docs/UMSHOP.png)
 
 ---
 
 ## 💻 Tech Stack
 
-This backend is designed using modern server-side technologies to ensure security, maintainability, and performance.
+UMSHOP Backend is designed using modern server-side technologies ensuring high performance, security, and clean code standards.
 
 ### **Core Technologies**
 
-| Component          | Technologies Used    |
-| ------------------ | -------------------- |
-| **Runtime**        | Node.js              |
-| **Framework**      | Express.js           |
-| **Language**       | TypeScript           |
-| **Authentication** | JWT (JSON Web Token) |
-| **Email Service**  | Nodemailer           |
-| **Slug Generator** | Slugify              |
+| Component          | Technologies Used     |
+| :----------------- | :-------------------- |
+| **Runtime**        | Node.js               |
+| **Framework**      | Express.js            |
+| **Language**       | TypeScript            |
+| **Authentication** | JSON Web Tokens (JWT) |
+| **Email Service**  | Nodemailer            |
+| **Slug Generator** | Slugify               |
+| **Database**       | MongoDB               |
 
 ---
 
 ### **Tools & Libraries**
 
-|                                                                                                           |                                                                                                                |                                                                                                                   |
-| :-------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
-|  ![Node](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)  |  ![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)   | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) |
-|  ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)   | ![Nodemailer](https://img.shields.io/badge/Nodemailer-00916E?style=for-the-badge&logo=mail.ru&logoColor=white) |     ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)      |
-| ![Slugify](https://img.shields.io/badge/Slugify-4A5568?style=for-the-badge&logo=markdown&logoColor=white) |                 ![Zod](https://img.shields.io/badge/Zod-3E8E41?style=for-the-badge&logo=none)                  |                ![Bcrypt](https://img.shields.io/badge/Bcrypt-2C5282?style=for-the-badge&logo=none)                |
+|                                                                                                           |                                                                                                                  |                                                                                                                   |
+| :-------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
+|  ![Node](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)  |   ![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)    | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) |
+|  ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)   | ![Nodemailer](https://img.shields.io/badge/Nodemailer-00916E?style=for-the-badge&logo=maildotru&logoColor=white) |     ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)      |
+| ![Slugify](https://img.shields.io/badge/Slugify-4A5568?style=for-the-badge&logo=markdown&logoColor=white) |                  ![Zod](https://img.shields.io/badge/Zod-3E8E41?style=for-the-badge&logo=none)                   |                ![Bcrypt](https://img.shields.io/badge/Bcrypt-2C5282?style=for-the-badge&logo=none)                |
 
 ---
 
-## 🔑 Key Features
+## 🚀 Features
 
-### 🔐 **Role-Based Access Control (RBAC)**
+### 🔑 **User Authentication & Security**
 
-- Admin & Customer roles.
-- Middleware-secured admin routes.
-- JWT-based secure authentication.
+- JWT-based secure login and registration
+- Strong password hashing using bcrypt
+- Secure role-based access system:
+  - **Admin**
+  - **Customer**
 
-### 🧑‍💼 **User Authentication**
+- Authorization middleware guarding admin routes
 
-- Register / Login using JWT.
-- Password hashed using bcrypt.
-- Forgot Password & Reset Password using Nodemailer.
+---
+
+### 🧑‍💼 **User Management**
+
+- Register, login, and user profile operations
+- Admin can manage all users
+- Forgot and Reset password via Nodemailer
+
+---
 
 ### 📦 **Product Management**
 
-- Admin CRUD operations.
-- Automated product slug generation using Slugify.
-- Public product browsing API.
+- Full CRUD for Admin
+- Public read-only endpoints
+- Automatic slug creation using **Slugify**
+- Image, price, stock, and category support
 
-### 🛍 **Order Management**
+---
 
-- Customers can place orders.
-- Admin can manage orders & change statuses.
+### 📦 **Order Management**
 
-### ⚙️ **Modular Architecture**
+- Customers can place orders
+- Admin can update order status (`pending`, `processing`, `completed`)
+- Transaction and shipping details supported
 
-- Controllers
-- Routes
-- Services
-- Middleware
-- Configurable Env System
+---
+
+### 🧩 **Modular Architecture**
+
+- Organized into:
+  - Controllers
+  - Routes
+  - Services
+  - Middleware
+  - Utils
+  - Config-driven environment system
+
+---
+
+<p align="center">
+  <img src="https://img.shields.io/badge/ACTION%20REQUIRED-Create%20a%20.env%20file%20and%20follow%20.env.example-red?style=for-the-badge&labelColor=black"/>
+</p>
 
 ---
 
@@ -78,21 +105,67 @@ This backend is designed using modern server-side technologies to ensure securit
 ### **Prerequisites**
 
 - Node.js v18+
-- npm
+- MongoDB running locally or in the cloud
+- npm or yarn
 
-### **Installation**
+---
+
+## 📥 Clone the Repository
 
 ```bash
-# Clone repository
 git clone https://github.com/pantho0/um-shop-server.git
 cd umshop-backend
+```
 
-# Install dependencies
+---
+
+## 📦 Install Dependencies
+
+```bash
 npm install
+```
 
-# Create env file
+---
+
+## ⚙️ Environment Setup
+
+```bash
 cp .env.example .env
+```
 
-# Run in development
+Fill variables:
+
+- MONGODB_URI
+- JWT_SECRET
+- EMAIL_USERNAME
+- EMAIL_PASSWORD
+- CLIENT_URL
+
+---
+
+## ▶️ Run the Development Server
+
+```bash
 npm run dev
 ```
+
+---
+
+## 🚀 Production Build
+
+```bash
+npm run build
+npm run start
+```
+
+---
+
+If you'd like, I can also generate:
+
+✅ API Endpoint Documentation
+✅ Folder Structure Diagram
+✅ Requirement Analysis PDF
+✅ Postman Collection JSON
+✅ Swagger API Docs File
+
+Just tell me!
