@@ -2,7 +2,7 @@
 
 A secure and scalable **eCommerce backend system** built with **Node.js**, **Express**, and **TypeScript**, featuring **JWT authentication**, **Role-Based Access Control**, **Slugify-based automatic product slugging**, and **Nodemailer-powered password reset system**.
 
-[![Live API](https://img.shields.io/badge/Live%20API-Visit%20Now-blue?style=for-the-badge)](#)
+[![Live SITE](https://umshop.vercel.app/)](#)
 [![Requirement Analysis](https://img.shields.io/badge/Requirement%20Analysis-View%20Docs-lightgrey?style=for-the-badge)](https://docs.google.com/document/d/1LdsUhhlyoZdZhl6cM83V-t7SGxNzBiJsgvi47d0dUZw/edit?usp=sharing)
 
 ## This backend powers a complete eCommerce infrastructure with secure authentication, product management, order handling, and user administration.
@@ -112,7 +112,9 @@ UMSHOP Backend is designed using modern server-side technologies ensuring high p
 
 ## POSTMAN COLLECTION FOR API TESTING
 
-[![Postman Collection](https://cdn.worldvectorlogo.com/logos/postman.svg)](https://postman.co/workspace/My-Workspace~e3a200b6-82da-4bdb-8199-62c7e7d6092a/collection/32753226-ae586a8c-9b51-41aa-a476-a0e8524c6bc7?action=share&creator=32753226&active-environment=32753226-463cd41c-98df-41c5-9b05-da4cb4b5c3df)
+<a href="https://postman.co/workspace/My-Workspace~e3a200b6-82da-4bdb-8199-62c7e7d6092a/collection/32753226-ae586a8c-9b51-41aa-a476-a0e8524c6bc7?action=share&creator=32753226&active-environment=32753226-463cd41c-98df-41c5-9b05-da4cb4b5c3df">
+  <img src="https://cdn.worldvectorlogo.com/logos/postman.svg" width="70" />
+</a>
 
 ## 📥 Clone the Repository
 
