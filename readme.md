@@ -116,6 +116,15 @@ UMSHOP Backend is designed using modern server-side technologies ensuring high p
   <img src="https://cdn.worldvectorlogo.com/logos/postman.svg" width="70" />
 </a>
 
+### 🔑 Default Admin Credentials
+
+Upon initial clone and setup, a default admin user will be automatically created for immediate login:
+
+| Field        | Value              |
+| :----------- | :----------------- |
+| **Email**    | `admin@umshop.com` |
+| **Password** | `Umshop@123`       |
+
 ## 📥 Clone the Repository
 
 ```bash
